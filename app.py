@@ -240,8 +240,8 @@ if groq_api_key.strip():
                             if content.strip():
                                 with st.spinner("Generating summary..."):
                                     chain = load_summarize_chain(llm, chain_type="stuff", prompt=prompt)
-                                    output_summary = chain.invoke(docs)
-                                    st.success(output_summary['input_documents'][0].page_content)
+                                    output_summary = chain.run(docs)
+                                    st.success(output_summary)
                             else:
                                 st.error("No readable content found at the provided URL.")
                         else:
