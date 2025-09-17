@@ -24,8 +24,7 @@ with st.sidebar:
 generic_url = st.text_input("URL", label_visibility="collapsed")
 
 prompt_template = """
-Provide a summary of the following content in not more than 300 words.
-Make sure that the summary is coherent and makes sense:
+Provide a summary of the following content in not more than 300 words:
 Content:{text}
 
 """
