@@ -10,7 +10,9 @@
 A Streamlit web application that uses LangChain and Groq AI to automatically summarize content from YouTube videos and websites. Get concise 300-word summaries of any video or article with just a URL!
 
 # Demo
-
+![YT Demo](assets/ui_1.png)
+![YT Demo](assets/ui_2.png)
+![YT Demo](assets/ui_3.png)
 
 
 ## Features
