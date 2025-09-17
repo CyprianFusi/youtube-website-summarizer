@@ -13,7 +13,6 @@ A Streamlit web application that uses LangChain and Groq AI to automatically sum
 ![YT Demo](assets/ui_1.png)
 ![YT Demo](assets/ui_2.png)
 ![YT Demo](assets/ui_3.png)
-![YT Demo](assets/ui_4.png)
 
 ## Features
 
