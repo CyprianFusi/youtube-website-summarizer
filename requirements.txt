@@ -3,7 +3,9 @@ langchain
 langchain-groq
 langchain-community
 python-dotenv
-youtube-transcript-api
+validators
+yt-dlp
 requests
 beautifulsoup4
-arxiv
+youtube-transcript-api
+unstructured
