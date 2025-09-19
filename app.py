@@ -366,8 +366,33 @@ if groq_api_key.strip():
 else:
     st.info("🔑 Please enter your Groq API Key to use the app")
 
-# Enhanced troubleshooting hints
+def test_youtube_transcript_api():
+    """Test if YouTube Transcript API is working correctly"""
+    if not YOUTUBE_TRANSCRIPT_AVAILABLE:
+        return False, "YouTube Transcript API not installed"
+    
+    try:
+        # Test with a known public video (this is just a test, won't actually fetch)
+        test_video_id = "dQw4w9WgXcQ"  # Rick Astley - Never Gonna Give You Up (public domain-ish)
+        
+        # Try to list transcripts (this will fail for private videos but should work for the API check)
+        transcript_list = YouTubeTranscriptApi.list_transcripts(test_video_id)
+        return True, "YouTube Transcript API is working"
+        
+    except Exception as e:
+        # If it fails with a specific error about the video, the API is still working
+        if "disabled" in str(e).lower() or "not available" in str(e).lower():
+            return True, "YouTube Transcript API is working (test video has disabled transcripts, but API is functional)"
+        return False, f"YouTube Transcript API error: {str(e)}"
+
+# Add this in the sidebar for debugging
 with st.sidebar:
+    if st.button("🔍 Test YouTube API"):
+        is_working, message = test_youtube_transcript_api()
+        if is_working:
+            st.success(message)
+        else:
+            st.error(message)
     st.subheader("Troubleshooting")
     st.markdown("""
     **YouTube Videos:**
