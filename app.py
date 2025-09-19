@@ -276,7 +276,7 @@ if groq_api_key.strip():
                             docs = get_youtube_transcript_yt_dlp(generic_url)
                         
                         # Fallback to youtube-transcript-api
-                        if not docs:
+                        if not docs and YOUTUBE_TRANSCRIPT_AVAILABLE:
                             st.info("🔄 Trying alternative transcript method...")
                             with st.spinner("Using fallback transcript method..."):
                                 docs = get_youtube_transcript_fallback(generic_url)
