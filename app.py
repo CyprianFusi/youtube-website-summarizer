@@ -10,7 +10,13 @@ from langchain.schema import Document
 from urllib.parse import urlparse, parse_qs
 from langchain.chains.summarize import load_summarize_chain
 from langchain_community.document_loaders import UnstructuredURLLoader
-from youtube_transcript_api import YouTubeTranscriptApi
+try:
+    from youtube_transcript_api import YouTubeTranscriptApi
+    YOUTUBE_TRANSCRIPT_AVAILABLE = True
+except ImportError:
+    YOUTUBE_TRANSCRIPT_AVAILABLE = False
+    st.warning("YouTube Transcript API not available. Only yt-dlp method will be used for YouTube videos.")
+
 from bs4 import BeautifulSoup
 
 ## Streamlit APP
