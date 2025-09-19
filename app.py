@@ -158,29 +158,48 @@ def get_youtube_transcript_fallback(url):
         video_id = extract_youtube_video_id(url)
         if not video_id:
             return None
-            
-        # Try to get transcript
-        transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
         
-        # Try to find English transcript
+        # Try different approaches for getting transcript
         try:
-            transcript = transcript_list.find_transcript(['en', 'en-US', 'en-GB'])
-            transcript_data = transcript.fetch()
-            
-            # Combine all text
+            # Method 1: Try to get transcript directly
+            transcript_data = YouTubeTranscriptApi.get_transcript(video_id, languages=['en', 'en-US', 'en-GB'])
             full_text = ' '.join([item['text'] for item in transcript_data])
-            
             return [Document(page_content=full_text, metadata={"source": url})]
             
-        except:
-            # Try any available transcript
-            for transcript in transcript_list:
+        except Exception as direct_error:
+            try:
+                # Method 2: Try with any available language
+                transcript_data = YouTubeTranscriptApi.get_transcript(video_id)
+                full_text = ' '.join([item['text'] for item in transcript_data])
+                return [Document(page_content=full_text, metadata={"source": url})]
+                
+            except Exception as any_lang_error:
                 try:
-                    transcript_data = transcript.fetch()
-                    full_text = ' '.join([item['text'] for item in transcript_data])
-                    return [Document(page_content=full_text, metadata={"source": url})]
-                except:
-                    continue
+                    # Method 3: List available transcripts and try each
+                    transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
+                    
+                    # Try to find English transcript first
+                    for transcript in transcript_list:
+                        try:
+                            if transcript.language_code in ['en', 'en-US', 'en-GB']:
+                                transcript_data = transcript.fetch()
+                                full_text = ' '.join([item['text'] for item in transcript_data])
+                                return [Document(page_content=full_text, metadata={"source": url})]
+                        except:
+                            continue
+                    
+                    # If no English, try any available transcript
+                    for transcript in transcript_list:
+                        try:
+                            transcript_data = transcript.fetch()
+                            full_text = ' '.join([item['text'] for item in transcript_data])
+                            return [Document(page_content=full_text, metadata={"source": url})]
+                        except:
+                            continue
+                            
+                except Exception as list_error:
+                    st.error(f"YouTube Transcript API error: {str(list_error)}")
+                    return None
                     
         return None
         
