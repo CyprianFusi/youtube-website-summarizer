@@ -213,7 +213,7 @@ black app.py
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE) file for details.
 
 ## Acknowledgments
 
@@ -225,9 +225,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/youtube-website-summarizer/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/youtube-website-summarizer/discussions)
-- **Email**: your.email@example.com
+- **Issues**: [GitHub Issues](https://github.com/CyprianFusi/youtube-website-summarizer/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/CyprianFusi/youtube-website-summarizer/discussions)
+- **Email**: cyprian.fusi@gmail.com
 
 ---
 
